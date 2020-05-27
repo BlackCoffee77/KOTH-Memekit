@@ -4,6 +4,8 @@ import (
 	"flag"
 	"math/rand"
 	"time"
+
+	"github.com/BlackCoffee77/KOTH-Memekit/memetools"
 )
 
 func main() {
@@ -12,5 +14,5 @@ func main() {
 
 	flag.Parse()
 
-	memetools.genFakeFlags(*fakeFlagsPtr, "/")
+	memetools.GenFakeFlags(*fakeFlagsPtr, "/")
 }
