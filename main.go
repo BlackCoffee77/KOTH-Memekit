@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"math/rand"
 	"time"
 
@@ -14,7 +15,10 @@ func signatureHandler(sigPointer *string) {
 	case "example":
 		signatures.ExampleSignature()
 
+	default:
+		fmt.Println("There is no signature for that user")
 	}
+
 }
 func main() {
 	rand.Seed(int64(time.Now().Nanosecond()))
