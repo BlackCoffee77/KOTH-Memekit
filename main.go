@@ -12,5 +12,5 @@ func main() {
 
 	flag.Parse()
 
-	tools.genFakeFlags(*fakeFlagsPtr, "/")
+	memetools.genFakeFlags(*fakeFlagsPtr, "/")
 }

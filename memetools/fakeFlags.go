@@ -19,7 +19,8 @@ func genFlagName() string {
 	return names[rand.Intn(len(names))] + ext[rand.Intn(len(ext))]
 }
 
-func genFakeFlags(num int, root string) {
+func GenFakeFlags(num int, root string) {
+	// fake flag generator
 	fmt.Println("Placing fake flags at: ")
 	for i := 0; i < num; i++ {
 
