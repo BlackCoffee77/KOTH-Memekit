@@ -21,11 +21,11 @@ func genFlagName() string {
 }
 
 func genFakeFlags(num int, root string) {
+	fmt.Println("Placing fake flags at: ")
 	for i := 0; i < num; i++ {
 
 		depth := rand.Intn(10) + 1
 		curDir := root
-		fmt.Println("depth", depth)
 
 		for j := 0; j < depth; j++ {
 
@@ -42,7 +42,6 @@ func genFakeFlags(num int, root string) {
 					dirs = append(dirs, file.Name()+"/")
 				}
 			}
-			fmt.Println(dirs)
 
 			if len(dirs) == 0 {
 				//break in order to write file
@@ -50,18 +49,17 @@ func genFakeFlags(num int, root string) {
 			}
 
 			curDir = curDir + dirs[rand.Intn(len(dirs))]
-
-			fmt.Println(curDir)
 		}
 
 		// create file at current location
-		fmt.Println("ree")
-		f, _ := os.Create(curDir + genFlagName())
+		loc := curDir + genFlagName()
+		fmt.Println(loc)
+		f, _ := os.Create(loc)
 		w := bufio.NewWriter(f)
 		bytes := md5.Sum([]byte(time.Now().String()))
 		finalHash := hex.EncodeToString(bytes[:])
 
-		w.WriteString(finalHash)
+		w.WriteString(finalHash + "\n")
 		w.Flush()
 	}
 }
@@ -71,7 +69,6 @@ func main() {
 	fakeFlagsPtr := flag.Int("fakeflags", 0, "Do you want to add fake flags?")
 
 	flag.Parse()
-	fmt.Println(*fakeFlagsPtr)
 
 	genFakeFlags(*fakeFlagsPtr, "/")
 }
