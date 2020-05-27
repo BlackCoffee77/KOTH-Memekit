@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/BlackCoffee77/KOTH-Memekit/fakeflags"
+	"github.com/BlackCoffee77/KOTH-Memekit/rootreplace"
 	"github.com/BlackCoffee77/KOTH-Memekit/signatures"
 )
 
@@ -20,17 +21,41 @@ func signatureHandler(sigPointer *string) {
 	}
 
 }
+
+type arrayFlags []string
+
+func (i *arrayFlags) String() string {
+	return "my string representation"
+}
+
+func (i *arrayFlags) Set(value string) error {
+	*i = append(*i, value)
+	return nil
+}
+
+var users arrayFlags
+
 func main() {
 	rand.Seed(int64(time.Now().Nanosecond()))
 	fakeFlagsPtr := flag.Int("fakeflags", 0, "Do you want to add fake flags?")
 
 	signaturePtr := flag.String("signature", "", "Whose signature would you like to use")
+
+	rootReplacePtr := flag.Bool("rootreplace", false, "If everyone is king, no one is king - Syndrome")
+
+	flag.Var(&users, "users", "A user in the KOTH game")
 	flag.Parse()
 
 	if *fakeFlagsPtr > 0 {
 		fakeflags.GenFakeFlags(*fakeFlagsPtr, "/")
 	}
 
-	signatureHandler(signaturePtr)
+	if *signaturePtr != "" {
+		signatureHandler(signaturePtr)
+	}
+
+	if *rootReplacePtr {
+		rootreplace.RootReplace(users)
+	}
 
 }
