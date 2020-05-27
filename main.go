@@ -9,6 +9,13 @@ import (
 	"github.com/BlackCoffee77/KOTH-Memekit/signatures"
 )
 
+func signatureHandler(sigPointer *string) {
+	switch *sigPointer {
+	case "example":
+		signatures.ExampleSignature()
+
+	}
+}
 func main() {
 	rand.Seed(int64(time.Now().Nanosecond()))
 	fakeFlagsPtr := flag.Int("fakeflags", 0, "Do you want to add fake flags?")
@@ -20,9 +27,6 @@ func main() {
 		fakeflags.GenFakeFlags(*fakeFlagsPtr, "/")
 	}
 
-	switch *signaturePtr {
-	case "example":
-		signatures.ExampleSignature()
-	}
+	signatureHandler(signaturePtr)
 
 }
