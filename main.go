@@ -55,7 +55,8 @@ func main() {
 	}
 
 	if *rootReplacePtr {
-		rootreplace.RootReplace(users)
+		go rootreplace.RootReplace(users)
 	}
 
+	fmt.Scanln()
 }
